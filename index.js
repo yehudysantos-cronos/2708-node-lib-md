@@ -1,5 +1,12 @@
 import fs from 'fs';
 import chalk from 'chalk';
+  
+function extraiLinks(texto) {
+    const regex = /\[([^[\]]*?)\]\((https?:\/\/[^\s?#.].[^\s]*)\)/gm;
+    const capturas = [...texto.matchAll(regex)];
+    const resultados = capturas.map(captura => ({[captura [1]]: captura[2]}))
+    return resultados;
+}
 
 function trataErro(erro) {
     console.log(erro);
@@ -10,11 +17,11 @@ function trataErro(erro) {
 
 async function pegaArquivo(caminhoDoArquivo) {
     try {
-         const encoding = 'utf-8';
-     const texto = awaitfs.promises.readFile(caminhoDoArquivo,encoding)
-     console.log(chalk.red(texto));
+     const encoding = 'utf-8';
+     const texto = await fs.promises.readFile(caminhoDoArquivo,encoding)
+     console.log(extraiLinks(texto));
     }  catch (erro) {
-        trataErro(erro)
+    trataErro(erro)
     }
     
 }
@@ -40,7 +47,9 @@ async function pegaArquivo(caminhoDoArquivo) {
 //}
 
 pegaArquivo('./arquivos/texto.md');
-pegaArquivo('./arquivos/');
 
-//console.log(chalk.bgCyan('Quem tem A Luz já mais ficará na escuridão'));
+
+// \[([^[\]]*?)\]\((https?:\/\/[^\s?#.].[^\s]*)\)
+
+//console.log(chalk.green('Quem tem a Luz já mais ficará na escuridão'));
 
