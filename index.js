@@ -47,7 +47,7 @@ async function pegaArquivo(caminhoDoArquivo) {
 //}
 
 pegaArquivo('./arquivos/texto.md');
-
+pegaArquivo('./arquivos/texto copy.md');
 
 // \[([^[\]]*?)\]\((https?:\/\/[^\s?#.].[^\s]*)\)
 
